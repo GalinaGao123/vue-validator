@@ -1,6 +1,6 @@
 # vue-validator
 
-> Valida Plugin for Vue2
+> A Vue plugin for validation
 
 ## Build Setup
 
