@@ -1,7 +1,7 @@
 import * as directive from './directive'
 
 export default {
-  install (Vue) {
+  install (Vue, options) {
     Vue.directive('validate', directive)
   }
 }
