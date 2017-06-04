@@ -33,10 +33,10 @@ function validate (el, bindings) {
   for(let i = 0; i < rules.length; i++) {
     if (validator[rules[i]](el.value)) {
       el.setAttribute('data-valid', true)
-      handleError(el)
+      handleError(el, rules[i])
     } else {
       el.setAttribute('data-valid', false)
-      handleError(el)
+      handleError(el, rules[i])
       return
     }
   }
@@ -51,14 +51,14 @@ function handleValidate (el, bindings) {
   el.addEventListener('blur', handleBlur)
 }
 
-function handleError (el) {
+function handleError (el, rule) {
   let parent = el.parentNode
-  if (el.getAttribute('data-valid') === 'true') {
-    document.querySelector('#'+el.name+'-error') && document.querySelector('#'+el.name+'-error').remove()
-  } else {
+  console.log(rule)
+  document.querySelector(`#${el.name}-error`) && document.querySelector(`#${el.name}-error`).remove()
+  if (el.getAttribute('data-valid') === 'false') {
     let span = document.createElement('span')
     span.id = el.name + '-error'
-    span.innerText = 'abcdefg'
+    span.innerText = el.getAttribute(`data-${rule}`)|| validator.getMsg(rule)
     parent.appendChild(span)
   }
 }
